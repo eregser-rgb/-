@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Грузоперевозки | Быстро, Надежно, Безопасно</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Шапка */
+        header {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Главный баннер */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1601579119051-d86c2c5f2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+        }
+
+        /* Услуги */
+        .services {
+            padding: 100px 0;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* О компании */
+        .about {
+            padding: 100px 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .features {
+            margin-top: 30px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .feature i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+
+        /* Калькулятор */
+        .calculator {
+            padding: 100px 0;
+            background: var(--light);
+        }
+
+        .calc-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .calc-result {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            display: none;
+        }
+
+        /* Контакты */
+        .contact {
+            padding: 100px 0;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-item i {
+            background: var(--secondary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        /* Футер */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .about-content, .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 20px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-truck-moving"></i>
+                    <h1>Груз<span>Перевозки</span></h1>
+                </div>
+                
+                <button class="mobile-menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav>
+                    <ul id="mainMenu">
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#calculator">Калькулятор</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Профессиональные грузоперевозки по России</h2>
+            <p>Надежные перевозки грузов любого типа и сложности. От малых посылок до крупногабаритных товаров. Быстро, безопасно и по доступным ценам.</p>
+            <a href="#calculator" class="cta-button">Рассчитать стоимость</a>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши услуги</h2>
+                <p>Мы предлагаем полный спектр услуг по грузоперевозкам для частных лиц и бизнеса</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-truck"></i>
+                    <h3>Наземные перевозки</h3>
+                    <p>Перевозка грузов автомобильным транспортом по всей территории России и СНГ.</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h3>Экспресс-доставка</h3>
+                    <p>Срочная доставка документов и грузов в кратчайшие сроки.</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-box-open"></i>
+                    <h3>Сборные грузы</h3>
+                    <p>Экономичная перевозка небольших партий грузов с объединением в общий контейнер.</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-warehouse"></i>
+                    <h3>Складирование</h3>
+                    <p>Ответственное хранение товаров на современных складских комплексах.</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-cube"></i>
+                    <h3>Крупногабаритные грузы</h3>
+                    <p>Перевозка тяжелых и негабаритных грузов специализированным транспортом.</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-globe-europe"></i>
+                    <h3>Международные перевозки</h3>
+                    <p>Организация мультимодальных перевозок по всему миру с оформлением таможенных документов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- О компании -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1562887189-e5d078343de4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Компания Грузоперевозки">
+                </div>
+                
+                <div class="about-text">
+                    <h2>О нашей компании</h2>
+                    <p>Мы - профессиональная логистическая компания с более чем 10-летним опытом на рынке грузоперевозок. Наша миссия - обеспечивать надежную и своевременную доставку грузов любой сложности.</p>
+                    
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Более 5000 успешных перевозок</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Собственный автопарк из 50+ единиц техники</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Страхование грузов на сумму до 10 млн. руб.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Круглосуточная поддержка клиентов</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>GPS-мониторинг всех перевозок</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="cta-button" style="margin-top: 20px;">Связаться с нами</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Калькулятор стоимости -->
+    <section class="calculator" id="calculator">
+        <div class="container">
+            <div class="section-title">
+                <h2>Калькулятор стоимости</h2>
+                <p>Рассчитайте приблизительную стоимость перевозки вашего груза</p>
+            </div>
+            
+            <div class="calc-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="from">Откуда:</label>
+                        <input type="text" id="from" placeholder="Город отправления">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="to">Куда:</label>
+                        <input type="text" id="to" placeholder="Город назначения">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="weight">Вес груза (кг):</label>
+                        <input type="number" id="weight" min="1" value="100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="volume">Объем (м³):</label>
+                        <input type="number" id="volume" min="0.1" step="0.1" value="1">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cargoType">Тип груза:</label>
+                        <select id="cargoType">
+                            <option value="standard">Стандартный</option>
+                            <option value="fragile">Хрупкий</option>
+                            <option value="perishable">Скоропортящийся</option>
+                            <option value="dangerous">Опасный</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="urgency">Срочность:</label>
+                        <select id="urgency">
+                            <option value="normal">Обычная (5-7 дней)</option>
+                            <option value="express">Экспресс (2-3 дня)</option>
+                            <option value="urgent">Срочная (24 часа)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="cta-button" id="calculateBtn" style="width: 100%;">Рассчитать стоимость</button>
+                
+                <div class="calc-result" id="calcResult">
+                    <p>Примерная стоимость перевозки: <span id="price">0</span> руб.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Контакты</h2>
+                <p>Свяжитесь с нами для получения подробной информации</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Наши контакты</h3>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Адрес:</h4>
+                            <p>г. Москва, ул. Логистическая, д. 15</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Телефон:</h4>
+                            <p>+7 (495) 123-45-67</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email:</h4>
+                            <p>info@gruz-perevozki.ru</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Режим работы:</h4>
+                            <p>Пн-Пт: 9:00 - 20:00, Сб: 10:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Отправить заявку</h3>
+                    <form id="requestForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Ваше имя" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" placeholder="Ваш телефон" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" placeholder="Ваш email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea placeholder="Сообщение" rows="5" style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="cta-button" style="width: 100%;">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Груз<span>Перевозки</span></div>
+                    <p>Профессиональные грузоперевозки по России и зарубеж. Надежность, скорость и безопасность.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Быстрые ссылки</h4>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#calculator">Калькулятор</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Контакты</h4>
+                    <p><i class="fas fa-phone"></i> +7 (495) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> info@gruz-perevozki.ru</p>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Логистическая, д. 15</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 ГрузПеревозки. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        const menuBtn = document.getElementById('menuBtn');
+        const mainMenu = document.getElementById('mainMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mainMenu.classList.toggle('active');
+        });
+        
+        // Калькулятор
+        const calculateBtn = document.getElementById('calculateBtn');
+        const calcResult = document.getElementById('calcResult');
+        const priceElement = document.getElementById('price');
+        
+        calculateBtn.addEventListener('click', () => {
+            // Базовые значения
+            let basePrice = 3000;
+            
+            // Получаем значения из формы
+            const weight = parseFloat(document.getElementById('weight').value) || 100;
+            const volume = parseFloat(document.getElementById('volume').value) || 1;
+            const cargoType = document.getElementById('cargoType').value;
+            const urgency = document.getElementById('urgency').value;
+            
+            // Расчет стоимости
+            let finalPrice = basePrice;
+            
+            // Вес (10 руб/кг)
+            finalPrice += weight * 10;
+            
+            // Объем (500 руб/м³)
+            finalPrice += volume * 500;
+            
+            // Тип груза
+            const cargoMultipliers = {
+                'standard': 1,
+                'fragile': 1.5,
+                'perishable': 1.8,
+                'dangerous': 2.2
+            };
+            finalPrice *= cargoMultipliers[cargoType];
+            
+            // Срочность
+            const urgencyMultipliers = {
+                'normal': 1,
+                'express': 1.5,
+                'urgent': 2.5
+            };
+            finalPrice *= urgencyMultipliers[urgency];
+            
+            // Округляем
+            finalPrice = Math.round(finalPrice);
+            
+            // Показываем результат
+            priceElement.textContent = finalPrice.toLocaleString('ru-RU');
+            calcResult.style.display = 'block';
+            
+            // Прокручиваем к результату
+            calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+        
+        // Форма заявки
+        const requestForm = document.getElementById('requestForm');
+        
+        requestForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+            requestForm.reset();
+        });
+        
+        // Плавная прокрутка для ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Закрываем мобильное меню после клика
+                    if(mainMenu.classList.contains('active')) {
+                        mainMenu.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
